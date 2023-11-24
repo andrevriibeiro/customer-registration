@@ -1,0 +1,106 @@
+<div class="header">
+    Cadastro
+</div>
+
+<div class="container">
+    <!-- formulario matricula -->
+    <form [formGroup]="formGroup">
+        <!-- nome -->
+        <div class="inputBox">
+            <span>Nome*</span>
+            <input type="text" formControlName="nome" name="number" placeholder="Digite seu nome"
+                [ngStyle]="{'border': isCampoInvalido('nome') ? '1px solid red' : ''}">
+        </div>
+        <!-- email -->
+        <div class="inputBox">
+            <span>E-mail*</span>
+            <input type="text" formControlName="email" placeholder="Digite seu melhor e-mail"
+                [ngStyle]="{'border': isCampoInvalido('email') ? '1px solid red' : ''}">
+        </div>
+        <!-- cpf -->
+        <div class="inputBox">
+            <span>CPF*</span>
+            <input type="text" formControlName="cpf" maxlength="14" placeholder="Digite CPF aqui" (keyup)="onKeyUpCpf()"
+                [ngStyle]="{'border': isCampoInvalido('cpf') ? '1px solid red' : ''}">
+        </div>
+        <!-- endereco -->
+        <div formGroupName="endereco">
+            <div class="form-flex">
+                <div class="inputBox column mr-20">
+                    <span>Endereço*</span>
+                    <input type="text" formControlName="endereco" placeholder="Digite endereço"
+                        [ngStyle]="{'border': isCampoInvalido('endereco.endereco') ? '1px solid red' : ''}">
+                </div>
+                <div class="inputBox column">
+                    <span>Estado*</span>
+                    <input type="text" formControlName="estado" required placeholder="Selecione o Estado">
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="inputBox column mr-20">
+                    <span>CEP*</span>
+                    <input type="text" formControlName="cep" required placeholder="00.000 - 000"
+                        [ngStyle]="{'border': isCampoInvalido('endereco.cep') ? '1px solid red' : ''}">
+                </div>
+                <div class="inputBox column">
+                    <span>Cidade*</span>
+                    <input type="text" formControlName="cidade" required placeholder="Selecione a Cidade">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-20">
+            <span class="title">Forma de Pagamento</span>
+            <mat-divider> </mat-divider>
+        </div>
+
+        <!-- dados pagamento -->
+        <div formGroupName="formaPagamento">
+            <div class="form-flex">
+                <div class="inputBox column mr-20">
+                    <span>Nome do cartão*</span>
+                    <input type="text" formControlName="nomeCartao" placeholder="Nome impresso no cartão"
+                        [ngStyle]="{'border': isCampoInvalido('formaPagamento.nomeCartao') ? '1px solid red' : ''}">
+                </div>
+                <div class="inputBox colun-mid mr-20">
+                    <span>Data de Expiração*</span>
+                    <select required formControlName="mesExpiracao">
+                        <option value="month" selected disabled>Mês</option>
+                        <option *ngFor="let mes of meses" [value]="mes">{{mes}}</option>
+                    </select>
+                </div>
+                <div class="inputBox colun-mid select-year">
+                    <select required formControlName="anoExpiracao">
+                        <option value="year" selected disabled>Ano</option>
+                        <option *ngFor="let ano of anos" [value]="ano">{{ano}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="inputBox column mr-20">
+                    <span>Número do Cartão*</span>
+                    <input type="text" formControlName="numeroCartao" maxlength="19" placeholder="0000 0000 0000 0000"
+                        (keyup)="onKeyUpNumeroCartao()"
+                        [ngStyle]="{'border': isCampoInvalido('formaPagamento.numeroCartao') ? '1px solid red' : ''}">
+                </div>
+                <div class="inputBox column">
+                    <span>Código de Segurança*</span>
+                    <input type="text" formControlName="codigoSeguranca" maxlength="3" placeholder="XXX"
+                        [ngStyle]="{'border': isCampoInvalido('formaPagamento.codigoSeguranca') ? '1px solid red' : ''}">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <mat-divider> </mat-divider>
+        </div>
+
+        <div class="action-content">
+            <span class="value-info">Seu cartão será debitado em R$ 49,00</span>
+            <button mat-button mat-raised-button (click)="realizarMatricula()"
+                [ngClass]="{'btn-disabled': !formGroup.valid}" [disabled]="!formGroup.valid">
+                REALIZAR MATRÍCULA
+            </button>
+            <span class="info">Informações seguras e criptografadas</span>
+        </div>
+    </form>

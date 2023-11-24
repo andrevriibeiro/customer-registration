@@ -1,0 +1,66 @@
+<div class="header">
+    Lista
+</div>
+
+<div class="container">
+    <div>
+        <span class="title">Lista de Clientes</span>
+        <mat-divider> </mat-divider>
+    </div>
+    <form>
+        <div class="inputBox">
+            <span>Nome do Cliente</span>
+            <input type="text" name="filtro" [(ngModel)]="pesquisa" placeholder="Digite seu nome">
+        </div>
+    </form>
+
+    <div class="table-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Criado em</th>
+                    <th *ngIf="alunos.length > 0" style="border: none;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let aluno of alunos | filter: pesquisa;">
+                    <td>
+                      <input *ngIf="alunoSendoEditado[aluno.id]" type="text" [(ngModel)]="aluno.nome">
+                      <span *ngIf="!alunoSendoEditado[aluno.id]">{{aluno.nome}}</span>
+                    </td>
+                    <td>
+                      <input *ngIf="alunoSendoEditado[aluno.id]" type="text" [(ngModel)]="aluno.email">
+                      <span *ngIf="!alunoSendoEditado[aluno.id]">{{aluno.email}}</span>
+                    </td>
+                    <td>
+                      <input *ngIf="alunoSendoEditado[aluno.id]" type="text" [(ngModel)]="aluno.cpf">
+                      <span *ngIf="!alunoSendoEditado[aluno.id]">{{aluno.cpf}}</span>
+                    </td>
+                    <td>
+                      <span>{{aluno.dataCadastro | date: 'dd/MM/yyyy HH:mm:ss'}}</span>
+                    </td>
+                    <td style="border: none">
+                        <img class="mr-10" *ngIf="alunoSendoEditado[aluno.id]" src="../../../assets/icon/ic_done.svg" alt="Salvar"
+                            (click)="atualizarAluno(aluno)">
+                        <img class="mr-10" *ngIf="!alunoSendoEditado[aluno.id]" src="../../../assets/icon/ic_editar.svg" alt="Editar"
+                            (click)="editar(aluno)">
+                        <img src="../../../assets/icon/ic_excluir.svg" (click)="excluirAluno(aluno.cpf)" alt="Excluir">
+                    </td>
+                </tr>
+                <tr style="color: #b5b4b4 !important;">
+                    <td>Exemplo de nome</td>
+                    <td>exemplo@mail.com</td>
+                    <td>000.000.000-00</td>
+                    <td>00/00/000</td>
+                    <td style="border: none"> 
+                        <img src="../../../assets/icon/ic_add.svg" alt="Adicionar" (click)="cadastrar()">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

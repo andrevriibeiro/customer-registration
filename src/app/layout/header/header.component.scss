@@ -1,0 +1,29 @@
+header {
+  padding: 20px;
+  background-color: #0A0A3C;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.ellipse {
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+img {
+  width: 20px;
+}
